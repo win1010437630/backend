@@ -29,12 +29,12 @@ class Team extends Component {
 	                                <input className="span9 second_work" type="text" />
 	                            </div>
 	                            <div className="field-box">
-	                                <label>Vision pic</label>
-	                                <input className="span8 vision_pic" type="file" onChange={this.setFiles}/><input type="button" className="two btn" value="上传"/>
+	                                <label>people pic</label>
+	                                <input className="span8 people_pic" type="file" onChange={this.setFiles}/><input type="button" className="two btn" value="上传"/>
 	                            </div>
 	                            <div className="field-box textarea">
-	                                <label>china history</label>
-	                                <textarea className="span9 china_history"></textarea>
+	                                <label>people intro</label>
+	                                <textarea className="span9 people_intro"></textarea>
 	                            </div>	                            
 	                            <div className="field-box actions">
 		                            <input type="button" className="btn-glow primary" value="Create poster" />

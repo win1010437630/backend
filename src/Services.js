@@ -1,7 +1,37 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import Simditor from 'simditor';
+import Richtext from './RichText';
 
 class Services extends Component {
+  componentDidMount(){
+    this.editor=new Simditor({
+      textarea:$('#editor'),
+      toolbar:[
+        'title',
+        'bold',
+        'italic',
+        'underline',
+        'strikethrough',
+        'fontScale',
+        'color',
+        'ol',
+        'ul',
+        'blockquote',
+        'code',
+        'table',
+        'link',
+        'image',
+        'hr',
+        'indent',
+        'outdent',
+        'alignment'
+      ]
+    });
+  }
+  richtext(){
+    alert(this.editor.getValue());
+  }
   render() {
     return (
       <div className="Services">
@@ -17,7 +47,7 @@ class Services extends Component {
 	                        <form>
 	                            <div className="field-box">
 	                                <label>Vision</label>
-	                                <input className="span8" type="text" />
+	                                <input className="span9" type="text" />
 	                            </div>
 	                            <div className="field-box">
 	                                <label>Picture</label>
@@ -28,23 +58,25 @@ class Services extends Component {
 	                                <input className="span8" type="file" onChange={this.setFiles}/><input type="button" className="two btn" value="上传"/>
 	                            </div>                                                       
 	                            <div className="field-box">
-	                                <label>Contacts:</label>
-	                                <input className="span8" type="text"/>
+	                                <label>Text:</label>
+	                                <textarea className="span9" rows="4"></textarea>
 	                            </div>
 	                            <div className="field-box">
-	                                <label>Work</label>
-	                                <input className="span8" type="text" />
+	                                <label>People</label>
+	                                <input className="span9" type="text" />
 	                            </div>                           
 	                            <div className="field-box textarea">
-	                                <label>Text:</label>
-	                                <textarea className="span8" rows="4"></textarea>
+	                                <label>Work:</label>
+	                                <input className="span9" type="text"/>
 	                            </div>
-	                            <div className="field-box textarea">
+	                            <div className="field-box">
 	                                <label>Related works</label>
-	                                <textarea className="span8" rows="4"></textarea>
+	                                <span style={{marginLeft: 0}} className="span9">
+	                                	<Richtext></Richtext>
+	                                </span>
 	                            </div>
 	                            <div className="span11 field-box actions"  style={{textAlign: "centers"}}>
-	                                <input type="button" className="btn-glow primary" value="Create poster" />
+	                                <input onClick={this.richtext.bind(this)} type="button" className="btn-glow primary" value="Create poster" />
 	                                <span> OR </span>
 	                                <input type="reset" value="Cancel" className="reset" />
 	                            </div>

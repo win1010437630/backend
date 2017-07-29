@@ -16,14 +16,6 @@ class History extends Component {
 	                    {/*left column*/}
 	                    <div className="span7 column">
 	                        <form>
-	                            <div className="field-box textarea">
-	                                <label>title</label>
-	                                <input className="span9 title" type="text" />
-	                            </div>
-	                            <div className="field-box">
-	                                <label>bbb</label>
-	                                <input className="span9 less" type="text" />
-	                            </div>
 	                            <div className="field-box">
 	                                <label>time</label>
 	                                <input className="span9 time" type="text" />
@@ -33,8 +25,8 @@ class History extends Component {
 	                                <textarea className="span9 china_history"></textarea>
 	                            </div>
 	                            <div className="field-box">
-	                                <label>Vision pic</label>
-	                                <input className="span8 vision_pic" type="file" onChange={this.setFiles}/><input type="button" className="two btn" value="上传"/>
+	                                <label>history pic</label>
+	                                <input className="span8 history_pic" type="file" onChange={this.setFiles}/><input type="button" className="two btn" value="上传"/>
 	                            </div>
 	                            <div className="field-box actions">
 		                            <input type="button" className="btn-glow primary" value="Create poster" />

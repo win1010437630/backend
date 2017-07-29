@@ -13,7 +13,6 @@ import History from './History';
 import Team from './Team';
 import Press from './Press';
 import Life from './Life';
-import Contant from './Contant';
 import Signin from './Signin';
 import Signup from './Signup';
 import logo from './img/logo.png';
@@ -66,9 +65,6 @@ class Better extends Component {
         this.refs.press.classList.add('active');        
         this.refs.ul_press.classList.add('active'); 
         this.refs.li_press.className='active';
-    }
-    else if(location.lastIndexOf('contant')!=-1){
-        this.refs.contant.classList.add('active');        
     }else if(location.lastIndexOf('signin')!=-1){
         this.refs.extras.classList.add('active');        
         this.refs.ul_sign.classList.add('active'); 
@@ -257,12 +253,6 @@ class Better extends Component {
                     <li><Link to="/life"><a ref='li_life'>life</a></Link></li>
                 </ul>
             </li>
-            <li ref='contant'>
-                <Link to="/contant">
-                    <i className="icon-cog"></i>
-                    <span>Contant</span>
-                </Link>
-            </li>
             <li ref='extras'>
                 <a className="dropdown-toggle" href="#">
                     <i className="icon-share-alt"></i>
@@ -287,7 +277,6 @@ class Better extends Component {
       <Route path="/team" component={Team}/>
       <Route path="/press" component={Press}/>
       <Route path="/life" component={Life}/>
-      <Route path="/contant" component={Contant}/>
       <Route path="/signin" component={Signin}/>
       <Route path="/signup" component={Signup}/>
     </div>

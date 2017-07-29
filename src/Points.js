@@ -1,8 +1,33 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
+import Simditor from 'simditor';
+import Richtext from './RichText';
 
 class Points extends Component {
 	componentDidMount(){
+	    this.editor=new Simditor({
+	      textarea:$('#editor'),
+	      toolbar:[
+	        'title',
+	        'bold',
+	        'italic',
+	        'underline',
+	        'strikethrough',
+	        'fontScale',
+	        'color',
+	        'ol',
+	        'ul',
+	        'blockquote',
+	        'code',
+	        'table',
+	        'link',
+	        'image',
+	        'hr',
+	        'indent',
+	        'outdent',
+	        'alignment'
+	      ]
+	    });
 	    $(function () {
 	      var $buttons = $(".toggle-inputs button");
 	      var $form = $("form.new_user_form");
@@ -17,6 +42,9 @@ class Points extends Component {
 	          }
 	      });
 	    });
+  }
+  richtext(){
+    alert(this.editor.getValue());
   }
   render() {
     return (
@@ -50,14 +78,12 @@ class Points extends Component {
 	                        </div>
 	                        <div className="span12 field-box textarea">
 	                            <label>Detail</label>
-	                            <textarea className="span9"></textarea>
-	                        </div>
-	                        <div className="span12 field-box textarea">
-	                            <label>Popular</label>
-	                            <textarea className="span9"></textarea>
+	                            <span style={{marginLeft: 0}} className="span9">
+	                                 <Richtext></Richtext>
+	                            </span>
 	                        </div>
 	                        <div className="span11 field-box actions">
-	                            <input type="button" className="btn-glow primary" value="Create poster" />
+	                            <input onClick={this.richtext.bind(this)} type="button" className="btn-glow primary" value="Create poster" />
 	                            <span>OR</span>
 	                            <input type="reset" value="Cancel" className="reset" />
 	                        </div>

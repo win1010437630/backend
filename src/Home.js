@@ -111,7 +111,7 @@ class Home extends Component {
 	                        <form>
 	                            <div className="field-box">
 	                                <label>Banner text</label>
-	                                <input className="span8 banner_text" type="text" data-toggle="tooltip" data-trigger="focus" title="Please enter a banner text" data-placement="right"/>
+	                                <input className="span9 banner_text" type="text" data-toggle="tooltip" data-trigger="focus" title="Please enter a banner text" data-placement="right"/>
 	                            </div>
 	                            <div className="field-box">
 	                                <label>Banner bg</label>
@@ -129,19 +129,39 @@ class Home extends Component {
 	                                <label>Services bg</label>
 	                                <input className="span8 services_bg" type="file" onChange={this.setFiles}/><input type="button" className="three btn" value="上传"/>
 	                            </div>
-	                            <div className="field-box">
-	                                <label>Services text</label>
-	                                <input className="span8 services_text" type="text" />
-	                            </div>
-	                            <div className="field-box">
-	                                <label>China bg</label>
-	                                <input className="span8 china_bg" type="file" onChange={this.setFiles}/><input type="button" className="four btn" value="上传"/>
-	                            </div> 
-	                            <div className="field-box">
-	                                <label>China text</label>
-	                                <input className="span8 china_text" type="text"/>
-	                            </div><br/>                   
-	                            <div className="span11 field-box actions">
+                                <div className="field-box">
+                                    <label>Services title</label>
+                                    <input className="span9 services_title" type="text" />
+                                </div>
+                                <div className="field-box">
+                                    <label>Services text</label>
+                                    <input className="span9 services_text" type="text" />
+                                </div>
+                                <div className="field-box">
+                                    <label>China bg</label>
+                                    <input className="span8 china_bg" type="file" onChange={this.setFiles}/><input type="button" className="four btn" value="上传"/>
+                                </div> 
+                                <div className="field-box">
+                                    <label>China title</label>
+                                    <input className="span9 china_title" type="text"/>
+                                </div>
+                                <div className="field-box">
+                                    <label>China text</label>
+                                    <input className="span9 china_text" type="text"/>
+                                </div> 
+                                <div className="field-box">
+                                    <label>sanya bg</label>
+                                    <input className="span8 sanya_bg" type="file" onChange={this.setFiles}/><input type="button" className="four btn" value="上传"/>
+                                </div> 
+                                <div className="field-box">
+                                    <label>sanya title</label>
+                                    <input className="span9 sanya_title" type="text"/>
+                                </div>
+                                <div className="field-box">
+                                    <label>sanya img</label>
+                                    <input className="span9 sanya_img" type="text"/>
+                                </div><br />                
+	                            <div className="field-box actions">
 	                                <input type="button" className="btn-glow primary Submit" value="Create poster"/>
 	                                <span> OR </span>
 	                                <input type="reset" value="Cancel" className="reset"/>
