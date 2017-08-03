@@ -13,12 +13,13 @@
 	font-size: 13px;
 }
 .btn-group button.glow {
-	font-size: 11px;
+	font-size: 10px;
 	font-family: "Open sans", Helvetica, Arial;
 	color: #313d4c;
 	font-weight: 700;
-	padding: 5px 10px;
+	padding: 5px 0;
 	line-height: 14px;
+	width:50%;
 	background: #fefefe; /* Old browsers */
 	background: -moz-linear-gradient(top, #fefefe 0%, #f7f7f7 100%); /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(100%,#f7f7f7)); /* Chrome,Safari4+ */

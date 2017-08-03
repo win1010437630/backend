@@ -197,3 +197,21 @@ div.span5.column{margin-left:0;}
     width: 53%; }
   #pad-wrapper .ui-elements .knob-wrapper + .knob-wrapper {
     margin-left: 35px; } }
+
+#save,#cancel,#remove,#replace{ 
+  display: inline-block;
+  padding:0px 10px;
+  color: #fff;
+  font-size: 14px;
+  margin:0 0 10px 5px;
+  line-height: 28px;
+  border-radius: 5px;
+  text-decoration: none;
+  cursor: pointer;
+  vertical-align:middle;
+}
+
+.field-box .add{display: none;}
+.move{display: inline-block;; line-height: 28px; margin-bottom: 10px;}
+.popup{margin:10px auto;}
+

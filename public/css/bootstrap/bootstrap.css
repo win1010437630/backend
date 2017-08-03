@@ -2283,9 +2283,6 @@ table th[class*="span"],
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url("../../img/glyphicons-halflings.png");
-  background-position: 14px 14px;
-  background-repeat: no-repeat;
 }
 
 /* White icons with optional class, or on hover/focus/active states of certain elements */
@@ -2566,10 +2563,6 @@ table th[class*="span"],
   background-position: -72px -72px;
 }
 
-.icon-edit {
-  background-position: -96px -72px;
-}
-
 .icon-share {
   background-position: -120px -72px;
 }
@@ -2763,9 +2756,6 @@ table th[class*="span"],
   background-position: -288px -120px;
 }
 
-.icon-chevron-down {
-  background-position: -313px -119px;
-}
 
 .icon-retweet {
   background-position: -336px -120px;
@@ -3610,6 +3600,7 @@ input[type="submit"].btn.btn-mini {
 }
 
 .btn-group {
+  width:100%;
   position: relative;
   display: inline-block;
   *display: inline;

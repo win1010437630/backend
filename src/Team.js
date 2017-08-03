@@ -1,8 +1,86 @@
 import React, { Component } from 'react';
 import $ from 'jquery';
 import gallery_img from './img/no-img-gallery.png';
-
+import config from './config';
 class Team extends Component {
+  componentDidMount(){
+	var ip=config.url;
+    var port=config.port;    
+    var setFiles;
+    var files;
+    setFiles=function(element){ files=element.files[0];};    
+    var html=`<div class="popup"><i class="icon-reply"></i><h5>Edit Image</h5>
+                    <div><input type="file" onchange="setFiles(this)"></div>
+                    <div class="description"><h6>Description</h6>
+                        <select class='select'>
+                            <option value='img'>img</option>                       
+                        </select>
+                        <input type="submit" value="Save" class="btn-glow primary submit" />
+                    </div>
+            </div>`;   
+    $('.pic').click(function(){
+        $('.no-gallery').append(html);
+        $('.icon-reply').on('click',function(){
+            $('.popup').css('display','none');
+        });
+        var select=$('.select option:selected');
+        $('.submit').click(function(){
+            var select=$('.select option:selected').val();
+            var fd=new FormData();
+            fd.append('uploadedFile',files);
+            console.log(fd)
+            if(select=='img'){
+                $.ajax({
+                    type:"post",
+                    url:ip+port+"/team/img",
+                    async:true,
+                    data:fd,
+                    contentType:false,
+                    processData:false,
+                    success:function(e){console.log(e)}
+                });
+            }
+        })
+    })  
+    this.refs.save.onclick=function(){
+        $.ajax({
+            type:"post",
+            url:ip+port+"/team",
+            async:true,
+            data:{
+                'name':$('.Name').val(),
+                'job_one':$('.job_one').val(),
+                'job_two':$('.job_two').val(),
+                'intro':$('.intro').val()
+            },
+            success:function(e){console.log(e)}
+        }); 
+    }
+    this.refs.replace.onclick=function(){
+      $.ajax({
+          type:"post",
+          url:ip+port+"/team/team_replace",
+          async:true,
+          data:{
+                'id':$('.id').val(),
+                'name':$('.Name').val(),
+                'job_one':$('.job_one').val(),
+                'job_two':$('.job_two').val(),
+                'intro':$('.intro').val()
+          },
+          success:function(e){console.log(e)}
+      });
+    }
+    this.refs.remove.onclick=function(){       
+        $.ajax({
+          type:"post",
+          url:ip+port+"/team/team_delete",
+          async:true,
+          data:{'id':$('.id').val()},
+          success:function(e){console.log(e)}
+        });
+    }    
+  }
   render() {
     return (
       <div className="Team">
@@ -16,31 +94,33 @@ class Team extends Component {
 	                    {/*left column*/}
 	                    <div className="span7 column">
 	                        <form>
-	                            <div className="field-box textarea">
+	                        	<div className="field-box">
+                                    <label>id</label>                                
+                                    <input className="span9 id" type="text" />
+                                </div>
+	                            <div className="field-box">
 	                                <label>Name</label>
-	                                <input className="span9 name" type="text" />
+	                                <input className="span9 Name" type="text"/>
 	                            </div>
 	                            <div className="field-box">
 	                                <label>First work</label>
-	                                <input className="span9 first-work" type="text" />
+	                                <input className="span9 job_one" type="text" />
 	                            </div>
 	                            <div className="field-box">
 	                                <label>Second work</label>
-	                                <input className="span9 second_work" type="text" />
-	                            </div>
-	                            <div className="field-box">
-	                                <label>people pic</label>
-	                                <input className="span8 people_pic" type="file" onChange={this.setFiles}/><input type="button" className="two btn" value="上传"/>
+	                                <input className="span9 job_two" type="text" />
 	                            </div>
 	                            <div className="field-box textarea">
-	                                <label>people intro</label>
-	                                <textarea className="span9 people_intro"></textarea>
+	                                <label>intro</label>
+	                                <textarea className="span9 intro"></textarea>
 	                            </div>	                            
-	                            <div className="field-box actions">
-		                            <input type="button" className="btn-glow primary" value="Create poster" />
-		                            <span>OR</span>
-		                            <input type="reset" value="Cancel" className="reset" />
-		                        </div>
+	                            <div className="span11 field-box actions"><br/>
+                                    <a id="save" ref='save' className='btn btn-success'>add</a>
+                                    <a id="replace" ref='replace' className='btn btn-info'>replace</a>
+                                    <a id="remove" ref='remove' className='btn btn-primary'>remove</a>
+                                    <span>OR</span>
+                                    <input type="reset" value="Cancel" className="reset" />
+                                </div>
 	                        </form>
 	                    </div>
 	                </div>

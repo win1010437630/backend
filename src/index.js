@@ -20,21 +20,9 @@ import logo from './img/logo.png';
 class Better extends Component {
   constructor(){
     super();
-    this.state={
-      
-    }
   }  
   componentDidMount(){
-    /*$.ajax({
-      url:'http://localhost:8005/text',
-      type:'get',
-      success:function(opt){
-        console.log(opt)
-        this.setState({arr:opt});
-      }.bind(this)
-   })*/
 	var location=window.location.href;
-
 	if(location.lastIndexOf('works')!=-1){
 		this.refs.works.classList.add('active');		
 		this.refs.ul_works.classList.add('active'); 
@@ -73,10 +61,11 @@ class Better extends Component {
         this.refs.extras.classList.add('active');        
         this.refs.ul_sign.classList.add('active'); 
         this.refs.li_signup.className='active';
+    }else if(location.substring('/',location.length-1)=='/'){
+        this.refs.home.classList.add('active');
     }else{
 		this.refs.home.classList.add('active');
 	}
-
   }
   render(){
     return (<Router>

@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Simditor from 'simditor';
 import Richtext from './RichText';
-
+import config from './config';
 class Points extends Component {
 	componentDidMount(){
-	    this.editor=new Simditor({
+	    var editor=new Simditor({
 	      textarea:$('#editor'),
 	      toolbar:[
 	        'title',
@@ -40,12 +40,78 @@ class Points extends Component {
 	          } else {
 	              $form.removeClass("inline-input");
 	          }
+	      });});
+	    var ip=config.url;
+	    var port=config.port;    	    
+	  	this.refs.save.onclick=function(){
+	      $.ajax({
+	          type:"post",
+	          url:ip+port+"/point",
+	          async:true,
+	          data:{
+	              'title':$('.title').val(),
+                  'name':$('.name').val(),
+                  'text':$('.text').val(),
+                  'time':$('.time').val(),
+                  'detail':editor.getValue()
+	          },
+	          success:function(e){console.log(e)}
+	      }); 
+	      $.ajax({
+                type:"post",
+                url:ip+port+"/point/popular",
+                async:true,
+                data:{
+                    'popular_title':$('.popular_title').val(),
+                    'popular_detail':$('.popular_detail').val()
+                },
+                success:function(e){console.log(e)}
+            });    
+	    }
+	    this.refs.replace.onclick=function(){
+	      $.ajax({
+	          type:"post",
+	          url:ip+port+"/point/replace",
+	          async:true,
+	          data:{
+	              'id':$('.id').val(),
+	              'title':$('.title').val(),
+                  'name':$('.name').val(),
+                  'text':$('.text').val(),
+                  'time':$('.time').val(),
+                  'detail':editor.getValue()
+	          },
+	          success:function(e){console.log(e)}
 	      });
-	    });
-  }
-  richtext(){
-    alert(this.editor.getValue());
-  }
+	      $.ajax({
+                type:"post",
+                url:ip+port+"/point/popular_replace",
+                async:true,
+                data:{
+                	'id':$('.id').val(),
+                    'popular_title':$('.popular_title').val(),
+                    'popular_detail':$('.popular_detail').val()
+                },
+                success:function(e){console.log(e)}
+            });
+	    }
+	    this.refs.remove.onclick=function(){       
+	      $.ajax({
+	          type:"post",
+	          url:ip+port+"/point/delete",
+	          async:true,
+	          data:{'id':$('.id').val()},
+	          success:function(e){console.log(e)}
+	      });
+	      $.ajax({
+	          type:"post",
+	          url:ip+port+"/point/popular_delete",
+	          async:true,
+	          data:{'id':$('.id').val()},
+	          success:function(e){console.log(e)}
+	      });
+	    }
+    }
   render() {
     return (
       <div className="Points">
@@ -60,34 +126,48 @@ class Points extends Component {
 	                    <div className="span9 with-sidebar">
 	                        <div className="container">
 	                            <form className="new_user_form inline-input">
-	                        <div className="span12 field-box">
-	                            <label>Title:</label>
-	                            <input className="span9" type="text" />
-	                        </div>
-	                        <div className="span12 field-box">
-	                            <label>Name:</label>
-	                            <input className="span9" type="text" />
-	                        </div>
-	                        <div className="span12 field-box">
-	                            <label>Text:</label>
-	                            <input className="span9" type="text" />
-	                        </div>
-	                        <div className="span12 field-box">
-	                            <label>Time</label>
-	                            <input className="span9" type="text" />
-	                        </div>
-	                        <div className="span12 field-box textarea">
-	                            <label>Detail</label>
-	                            <span style={{marginLeft: 0}} className="span9">
-	                                 <Richtext></Richtext>
-	                            </span>
-	                        </div>
-	                        <div className="span11 field-box actions">
-	                            <input onClick={this.richtext.bind(this)} type="button" className="btn-glow primary" value="Create poster" />
-	                            <span>OR</span>
-	                            <input type="reset" value="Cancel" className="reset" />
-	                        </div>
-	                    </form> 
+	                            	<div className="field-box">
+                                        <label>id</label>                                
+                                        <input className="span9 id" type="text" />
+                                    </div>
+		                        	<div className="span12 field-box">
+			                            <label>Title:</label>
+			                            <input className="span9 title" type="text" />
+			                        </div>
+			                        <div className="span12 field-box">
+			                            <label>Name:</label>
+			                            <input className="span9 name" type="text" />
+			                        </div>
+			                        <div className="span12 field-box">
+			                            <label>Text:</label>
+			                            <input className="span9 text" type="text" />
+			                        </div>
+			                        <div className="span12 field-box">
+			                            <label>Time</label>
+			                            <input className="span9 time" type="text" />
+			                        </div>
+			                        <div className="span12 field-box">
+			                            <label>Detail</label>
+			                            <span style={{marginLeft: 0}} className="span9 detail">
+			                                 <Richtext></Richtext>
+			                            </span>
+			                        </div>
+			                        <div className="span12 field-box">
+			                            <label>popular title</label>
+			                            <input className="span9 popular_title" type="text" />
+			                        </div>
+			                        <div className="span12 field-box">
+			                            <label>popular detail</label>
+			                            <input className="span9 popular_detail" type="text" />
+			                        </div>
+			                        <div className="span11 field-box actions">
+	                                  <a id="save" ref='save' className='btn btn-success'>add</a>
+	                                  <a id="replace" ref='replace' className='btn btn-info'>replace</a>
+	                                  <a id="remove" ref='remove' className='btn btn-primary'>remove</a>
+	                                  <span>OR</span>
+	                                  <input type="reset" value="Cancel" className="reset" />
+	                                </div>
+		                        </form> 
 	                        </div>
 	                    </div>
 	                    {/*side right column*/}

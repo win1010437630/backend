@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import $ from 'jquery';
 import Simditor from 'simditor';
 import Richtext from './RichText';
-
+import gallery_img from './img/no-img-gallery.png';
+import config from './config';
 class Services extends Component {
   componentDidMount(){
-    this.editor=new Simditor({
+    var editor=new Simditor({
       textarea:$('#editor'),
       toolbar:[
         'title',
@@ -26,11 +27,108 @@ class Services extends Component {
         'indent',
         'outdent',
         'alignment'
-      ]
-    });
-  }
-  richtext(){
-    alert(this.editor.getValue());
+      ]});
+    var ip=config.url;
+    var port=config.port;    
+    var setFiles;
+    var files;
+    setFiles=function(element){ files=element.files[0];};    
+    var html=`<div class="popup"><i class="icon-reply"></i><h5>Edit Image</h5>
+                    <div><input type="file" onchange="setFiles(this)"></div>
+                    <div class="description"><h6>Description</h6>
+                        <select class='select'>
+                            <option value='services_img'>services img</option>
+                            <option value='services_gif'>services gif</option>
+                            <option value='small_png'>small png</option>
+                        </select>
+                        <input type="submit" value="Save" class="btn-glow primary submit" />
+                    </div>
+            </div>`;   
+
+    $('.pic').click(function(){
+        $('.no-gallery').append(html);
+        $('.icon-reply').on('click',function(){
+            $('.popup').css('display','none');
+        });
+        var select=$('.select option:selected');
+        $('.submit').click(function(){
+            var select=$('.select option:selected').val();
+            var fd=new FormData();
+            fd.append('uploadedFile',files);
+            console.log(fd)
+            if(select=='services_gif'){
+                $.ajax({
+                    type:"post",
+                    url:ip+port+"/services/gif",
+                    async:true,
+                    data:fd,
+                    contentType:false,
+                    processData:false,
+                    success:function(e){console.log(e)}
+                });
+            }else if(select=='services_img'){
+                $.ajax({
+                    type:"post",
+                    url:ip+port+"/services/img",
+                    async:true,
+                    data:fd,
+                    contentType:false,
+                    processData:false,
+                    success:function(e){console.log(e)}
+                });
+            }else if(select=='small_png'){
+                $.ajax({
+                    type:"post",
+                    url:ip+port+"/services/small",
+                    async:true,
+                    data:fd,
+                    contentType:false,
+                    processData:false,
+                    success:function(e){console.log(e)}
+                });
+            }
+        })
+    })	
+    this.refs.save.onclick=function(){
+        $.ajax({
+            type:"post",
+            url:ip+port+"/services",
+            async:true,
+            data:{
+                'services_vision':$('.services_vision').val(),
+                'services_text':$('.services_text').val(),
+                'services_admin':$('.services_admin').val(),
+                'services_work':$('.services_work').val(),
+                'services_more':editor.getValue()
+            },
+            success:function(e){console.log(e)}
+        }); 
+    }
+    this.refs.replace.onclick=function(){
+      $.ajax({
+          type:"post",
+          url:ip+port+"/services/services_replace",
+          async:true,
+          data:{
+                'id':$('.id').val(),
+                'services_vision':$('.services_vision').val(),
+                'services_text':$('.services_text').val(),
+                'services_admin':$('.services_admin').val(),
+                'services_work':$('.services_work').val(),
+                'services_more':editor.getValue()
+          },
+          success:function(e){console.log(e)}
+      });
+    }
+    this.refs.remove.onclick=function(){       
+        $.ajax({
+          type:"post",
+          url:ip+port+"/services/services_delete",
+          async:true,
+          data:{'id':$('.id').val()},
+          success:function(e){console.log(e)}
+        });
+    }
   }
   render() {
     return (
@@ -38,66 +136,61 @@ class Services extends Component {
       	<div className="content">
 	        <div className="container-fluid">
 	            <div id="pad-wrapper" className="form-page">
-	            <div className="row-fluid header">
-	                <h3>From</h3>
-	            </div>
+    	            <div className="row-fluid header">
+    	                <h3>From</h3>
+    	            </div>
 	                <div className="row-fluid form-wrapper">
 	                    {/*left column*/}
-	                    <div className="span7 column">
+	                    <div className="span9 column">
 	                        <form>
+                                <div className="field-box">
+                                    <label>id</label>                                
+                                    <input className="span9 id" type="text" />
+                                </div>
 	                            <div className="field-box">
-	                                <label>Vision</label>
-	                                <input className="span9" type="text" />
+	                                <label>services vision</label>
+	                                <input className="span9 services_vision" type="text" />
 	                            </div>
 	                            <div className="field-box">
-	                                <label>Picture</label>
-	                                <input className="span8" type="file" onChange={this.setFiles}/><input type="button" className="one btn" value="上传"/>
+	                                <label>services text</label>
+	                                <input className="span9 services_text" type="text"/>
 	                            </div>
 	                            <div className="field-box">
-	                                <label>Picture gif</label>
-	                                <input className="span8" type="file" onChange={this.setFiles}/><input type="button" className="two btn" value="上传"/>
-	                            </div>                                                       
-	                            <div className="field-box">
-	                                <label>Text:</label>
-	                                <textarea className="span9" rows="4"></textarea>
-	                            </div>
-	                            <div className="field-box">
-	                                <label>People</label>
-	                                <input className="span9" type="text" />
+	                                <label>services admin</label>
+	                                <input className="span9 services_admin" type="text" />
 	                            </div>                           
 	                            <div className="field-box textarea">
-	                                <label>Work:</label>
-	                                <input className="span9" type="text"/>
+	                                <label>services work</label>
+	                                <textarea className="span9 services_work" rows="4"></textarea>
 	                            </div>
 	                            <div className="field-box">
 	                                <label>Related works</label>
-	                                <span style={{marginLeft: 0}} className="span9">
+	                                <span style={{marginLeft: 0}} className="span9 services_more">
 	                                	<Richtext></Richtext>
 	                                </span>
 	                            </div>
-	                            <div className="span11 field-box actions"  style={{textAlign: "centers"}}>
-	                                <input onClick={this.richtext.bind(this)} type="button" className="btn-glow primary" value="Create poster" />
-	                                <span> OR </span>
-	                                <input type="reset" value="Cancel" className="reset" />
-	                            </div>
+	                            <div className="span11 field-box actions"><br/>
+                                    <a id="save" ref='save' className='btn btn-success'>add</a>
+                                    <a id="replace" ref='replace' className='btn btn-info'>replace</a>
+                                    <a id="remove" ref='remove' className='btn btn-primary'>remove</a>
+                                    <span>OR</span>
+                                    <input type="reset" value="Cancel" className="reset" />
+                                </div>
 	                        </form>
-	                    </div>
-	                    <div className="span5 column">
-	                        <table className="table">
-	                            <tbody>
-	                            	<tr>
-		                                <td>Vision</td>
-		                                <td>Picture</td>
-		                                <td>Picture gif</td>
-		                                <td>Contacts</td>
-		                                <td>Work</td>
-		                                <td>Text</td>
-		                            </tr>
-	                            </tbody>
-	                        </table>
 	                    </div>
 	                </div>
 	            </div>
+                <div className="no-gallery">
+                    <div className="row-fluid header">
+                      <h3>Media And Photos</h3>
+                    </div>
+                    <div className="center">
+                      <img src={gallery_img} />
+                      <h6>You don`t have any images</h6>
+                      <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form</p>
+                      <a className="btn-glow primary pic">Add new file</a>
+                    </div>
+                </div>
 	        </div>
 	    </div>
       </div>

@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import $ from 'jquery';
 import './simditor.css';
-	
 class Richtext extends Component{
 	render(){
 		return (
