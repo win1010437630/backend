@@ -130,7 +130,7 @@ class Works extends Component {
               'detail':editor.getValue(),
               'work_about':$('.work_about').val(),
               'work_say':$('.work_say').val(),
-              'work_about':$('.work_about').val(),
+              'prize_text_two':$('.prize_text_two').val(),
               'prize_text':$('.prize_text').val(),
               'prize_time':$('.prize_time').val()
           },
@@ -150,7 +150,7 @@ class Works extends Component {
               'detail':editor.getValue(),
               'work_about':$('.work_about').val(),
               'work_say':$('.work_say').val(),
-              'work_about':$('.work_about').val(),
+              'prize_text_two':$('.prize_text_two').val(),
               'prize_text':$('.prize_text').val(),
               'prize_time':$('.prize_time').val()
           },
@@ -197,7 +197,6 @@ class Works extends Component {
                                       <label>Year:</label>
                                       <input className="span9 year" type="text" />
                                   </div>    
-
                                   <div className="span12 field-box">
                                       <label>Poster detail</label>
                                       <span className="span9 detail" style={{marginLeft: 0}}><Richtext></Richtext></span>
@@ -209,15 +208,14 @@ class Works extends Component {
                                   <div className="span12 field-box textarea">
                                       <label>Work say:</label>
                                       <textarea className="span9 work_say"></textarea>
-                                  </div>
-                                  
+                                  </div>                                  
                                   <div className="span12 field-box">
                                       <label>prize text:</label>
                                       <input className="span9 prize_text" type="text" />
                                   </div>
                                   <div className="span12 field-box">
-                                      <label>prize time:</label>
-                                      <input className="span9 prize_time" type="text" />
+                                      <label>prize_text_two</label>
+                                      <input className="span9 prize_text_two" type="text" />
                                   </div>
                                   <div className="span11 field-box actions">
                                       <a id="save" ref='save' className='btn btn-success'>add</a>
