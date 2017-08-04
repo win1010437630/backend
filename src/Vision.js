@@ -101,6 +101,7 @@ class Vision extends Component {
         })
     })  
     this.refs.save.onclick=function(){
+        console.log(editor.getValue())
         $.ajax({
             type:"post",
             url:ip+port+"/vision",
@@ -108,10 +109,10 @@ class Vision extends Component {
             data:{
                 'vision_title':$('.vision_title').val(),
                 'vision_text':$('.vision_text').val(),
-                'vision_textarea':$('.vision_textarea').val(),
+                'vision_textarea':editor.getValue(),
                 'prize_name':$('.prize_name').val(),
                 'prize_time':$('.prize_time').val(),
-                'vision_history_text':editor.getValue()
+                'vision_history_text':$('.vision_history_text').val()
             },
             success:function(e){console.log(e)}
         }); 
@@ -125,10 +126,10 @@ class Vision extends Component {
                 'id':$('.id').val(),
                 'vision_title':$('.vision_title').val(),
                 'vision_text':$('.vision_text').val(),
-                'vision_textarea':$('.vision_textarea').val(),
+                'vision_textarea':editor.getValue(),
                 'prize_name':$('.prize_name').val(),
                 'prize_time':$('.prize_time').val(),
-                'vision_history_text':editor.getValue()
+                'vision_history_text':$('.vision_history_text').val()
           },
           success:function(e){console.log(e)}
       });
@@ -168,11 +169,15 @@ class Vision extends Component {
 	                                <label>Vision text</label>
 	                                <input type='text' className="span9 vision_text" />
 	                            </div>
+                                <div className="field-box">
+                                    <label>Vision textarea</label>
+                                    <span style={{marginLeft: 0}} className="span9 vision_textarea">
+                                        <Richtext></Richtext>
+                                    </span>
+                                </div>
 	                            <div className="field-box textarea">
 	                                <label>vision history text</label>
-	                                <span style={{marginLeft: 0}} className="span9 vision_history_text">
-	                                	<Richtext></Richtext>
-	                                </span>
+                                    <input type='text' className="span9 vision_history_text" />
 	                            </div>
 	                            <div className="field-box textarea">
 	                                <label>prize name</label>
