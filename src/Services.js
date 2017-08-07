@@ -44,7 +44,6 @@ class Services extends Component {
                         <input type="submit" value="Save" class="btn-glow primary submit" />
                     </div>
             </div>`;   
-
     $('.pic').click(function(){
         $('.no-gallery').append(html);
         $('.icon-reply').on('click',function(){
@@ -89,46 +88,6 @@ class Services extends Component {
             }
         })
     })	
-    this.refs.save.onclick=function(){
-        $.ajax({
-            type:"post",
-            url:ip+port+"/services",
-            async:true,
-            data:{
-                'services_vision':$('.services_vision').val(),
-                'services_text':$('.services_text').val(),
-                'services_admin':$('.services_admin').val(),
-                'services_work':$('.services_work').val(),
-                'services_more':editor.getValue()
-            },
-            success:function(e){console.log(e)}
-        }); 
-    }
-    this.refs.replace.onclick=function(){
-      $.ajax({
-          type:"post",
-          url:ip+port+"/services/services_replace",
-          async:true,
-          data:{
-                'id':$('.id').val(),
-                'services_vision':$('.services_vision').val(),
-                'services_text':$('.services_text').val(),
-                'services_admin':$('.services_admin').val(),
-                'services_work':$('.services_work').val(),
-                'services_more':editor.getValue()
-          },
-          success:function(e){console.log(e)}
-      });
-    }
-    this.refs.remove.onclick=function(){       
-        $.ajax({
-          type:"post",
-          url:ip+port+"/services/services_delete",
-          async:true,
-          data:{'id':$('.id').val()},
-          success:function(e){console.log(e)}
-        });
-    }
   }
   render() {
     return (
